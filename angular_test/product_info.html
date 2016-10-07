@@ -1,0 +1,5 @@
+ <p>{{product.name}}</p>
+      <img ng-src="{{product.images[0].full}}"
+      <p>{{product.price | currency}}</p>
+      <p>{{product.description}}</p>
+      <button ng-show="product.canPurchase">Add to cart</button>

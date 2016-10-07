@@ -1,0 +1,54 @@
+<section>
+      <ul class="nav nav-pills">
+        <li ng-class="{active:panel.isSelected(1)}"><a ng-click="panel.selectTab(1)">Description</a></li>
+        <li ng-class="{active:panel.isSelected(2)}"><a ng-click="panel.selectTab(2)">Specification</a></li>
+        <li ng-class="{active:panel.isSelected(3)}"><a ng-click="panel.selectTab(3)">Review</a></li>
+      </ul>
+      
+      
+      <div class="panel" ng-show="panel.isSelected(1)">
+        <p><b>Description</b></p>
+        <p>{{product.description}}</p>
+      </div>
+      
+      <div class="panel" ng-show="panel.isSelected(2)">
+        <p><b>Specification</b></p>
+        <blockquote>None Yet</blockquote>
+      </div>
+      
+      <div class="panel" ng-show="panel.isSelected(3)">
+        <p><b>Review</b></p>
+        <blockquote ng-repeat="review in product.reviews">
+          <b>Stars: {{review.stars}}</b>
+          {{review.body}}
+          <cite>By: {{review.author}}</cite>
+        </blockquote>
+        
+        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+          <blockquote>
+            <b>Stars: {{reviewCtrl.review.stars}}</b>
+            {{reviewCtrl.review.body}}
+            <cite>By: {{reviewCtrl.review.author}}</cite>
+          </blockquote>
+          
+          <select ng-model="reviewCtrl.review.stars" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>            
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          
+          <textarea ng-model="reviewCtrl.review.body" required></textarea>
+          <label>By</label>
+          <input type="email" ng-model="reviewCtrl.review.author" required/>
+          
+          <div>
+            review form is {{reviewForm.$valid}}
+          </div>
+          
+          <input type="submit" value="Submit"/>
+        </form>
+        
+      </div>
+    </section>
